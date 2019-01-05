@@ -1,6 +1,6 @@
 {
   "name": "@cork-labs/mixin-emitter",
-  "version": "0.1.2",
+  "version": "0.1.3-pre",
   "description": "Node.js mixin, exposes `on()`, `once()`, `off()` in an object, allows encapsulating the emitter",
   "license": "MIT",
   "homepage": "https://github.com/cork-labs/mixin-emitter",
