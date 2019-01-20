@@ -9,16 +9,18 @@
 npm install --save @cork-labs/mixin-emitter
 ```
 
-```javascript
-const emitterMixin = require('@cork-labs/mixin-emitter');
+```typescript
+import { mixinEmitter } from '@cork-labs/mixin-emitter';
 
-class Foobar () {
-  constructor() {
-    this._emitter = emitterMixin(this);
+class Foobar implements IEmitter {
+  private emitter: EventEmitter;
+
+  constructor () {
+    this.emitter = mixinEmitter(this);
   }
 
   bar () {
-    this._emitter.emit('baz', 101, 102);
+    this.emitter.emit('baz', 101, 102);
   }
 }
 
@@ -31,29 +33,39 @@ foobar.on('baz', (arg1, arg2) => {
 
 ## API
 
-### emitterMixin(instance[, methods])
+### `mixinEmitter`
 
-- `instance` - where to expose the methods
-- `methods` - what methods to expose, defaults to `['on', 'once', 'off']`
+#### `mixinEmitter(object): EventEmitter`
 
-## Develop
+Exposes `on()`, `once()`, `off()` in the object and returns the underlying `EventEmitter`.
 
-```shell
-# lint and fix
-npm run lint
+- `object: any`
 
-# run test suite
-npm test
 
-# lint and test
-npm run build
+## Development
 
-# serve test coverage
-npm run coverage
+### Install dependencies
 
-# publish a minor version
-node_modules/.bin/npm-bump minor
 ```
+npm install -g nodemon http-server
+```
+
+### Code, test, publish
+
+#### VSCode launchers:
+- `test` - run tests once
+
+#### NPM scripts:
+- `npm run dev` - run tests (restarts when files saved)
+- `npm run lint` - lint
+- `npm run lint-fix` - lint and fix
+- `npm test` - run all test suites and produce code coverage reports
+- `npm run test-u` - run unit tests
+- `npm run test-i` - run integration tests
+- `npm run coverage` - serve test coverage reports
+- `npm run clean` - delete all build artifacts
+- `npm run build` - lint and test
+- `npm run pub` - publish a patch version (use `npm-bump minor` to publish a minor version)
 
 
 ### Contributing
@@ -65,12 +77,15 @@ Check [CONTRIBUTING](https://github.com/cork-labs/contributing/blob/master/CONTR
 
 ## Links
 
-- [npm-bump](https://www.npmjs.com/package/npm-bump)
-- [chai](http://chaijs.com/api/)
+- [ts-node](https://www.npmjs.com/package/ts-node)
+- [nyc](https://github.com/istanbuljs/nyc)
+- [mocha](https://github.com/mochajs/mocha)
+- [chai](https://github.com/chaijs/chai)
 - [sinon](http://sinonjs.org/)
 - [sinon-chai](https://github.com/domenic/sinon-chai)
+- [npm-bump](https://www.npmjs.com/package/npm-bump)
 
 
 ## [MIT License](LICENSE)
 
-[Copyright (c) 2018 Cork Labs](http://cork-labs.mit-license.org/2018)
+[Copyright (c) 2019 Cork Labs](http://cork-labs.mit-license.org/2019)
