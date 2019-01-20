@@ -1,6 +1,6 @@
 {
   "name": "@cork-labs/interface-emitter",
-  "version": "0.3.1",
+  "version": "0.3.2-pre",
   "description": "Typescript interface with emitter api subset (`on`, `once`, `off`) for objects with encapsulated emitter",
   "license": "MIT",
   "homepage": "https://github.com/cork-labs/interface-emitter",
