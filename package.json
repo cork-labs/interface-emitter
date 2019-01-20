@@ -1,13 +1,13 @@
 {
-  "name": "@cork-labs/mixin-emitter",
+  "name": "@cork-labs/interface-emitter",
   "version": "0.2.1-pre",
-  "description": "Node.js mixin, exposes `on()`, `once()`, `off()` in an object, allows encapsulating the emitter",
+  "description": "Typescript interface with emitter api subset (`on`, `once`, `off`) for objects with encapsulated emitter",
   "license": "MIT",
-  "homepage": "https://github.com/cork-labs/mixin-emitter",
+  "homepage": "https://github.com/cork-labs/interface-emitter",
   "author": "Andre Torgal <andre.torgal@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cork-labs/mixin-emitter.git"
+    "url": "https://github.com/cork-labs/interface-emitter.git"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

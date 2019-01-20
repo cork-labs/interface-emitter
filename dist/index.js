@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var mixin_emitter_1 = require("./mixin-emitter");
-exports.mixinEmitter = mixin_emitter_1.mixinEmitter;
+var events_1 = require("events");
+exports.EventEmitter = events_1.EventEmitter;
+exports.foo = 12;
 //# sourceMappingURL=index.js.map

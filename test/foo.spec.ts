@@ -3,38 +3,33 @@ import 'mocha';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
-import { mixinEmitter } from './mixin-emitter';
+import { FooBar } from './foo-bar';
 
 const expect = chai.expect;
 chai.use(sinonChai);
 chai.use(sinonChai);
 
-describe('mixinEmitter()', function t () {
+describe('IEmitter', function t () {
   beforeEach(function t () {
-    this.object = {};
-    this.emitter = mixinEmitter(this.object);
-  });
-
-  it('should be a function', function t () {
-    expect(mixinEmitter).to.be.a('function');
+    this.foo = new FooBar();
   });
 
   it('should expose the methods', function t () {
-    expect(this.object.on).to.be.a('function');
-    expect(this.object.once).to.be.a('function');
-    expect(this.object.off).to.be.a('function');
+    expect(this.foo.on).to.be.a('function');
+    expect(this.foo.once).to.be.a('function');
+    expect(this.foo.off).to.be.a('function');
   });
 
   describe('given a "on" subscriber', function t () {
     beforeEach(function t () {
       this.spy = sinon.spy();
-      this.object.on('foobar', this.spy);
+      this.foo.on('bar', this.spy);
     });
 
     describe('when emit() is invoked', function t () {
       beforeEach(function t () {
         this.args = [1, 0, -1];
-        this.emitter.emit('foobar', ...this.args);
+        this.foo.bar(...this.args);
       });
 
       it('should invoke the callback', function t () {
@@ -43,7 +38,7 @@ describe('mixinEmitter()', function t () {
 
       describe('and when emit() is invoked again', function t () {
         beforeEach(function t () {
-          this.emitter.emit('foobar', 'baz');
+          this.foo.bar('baz');
         });
 
         it('should invoke the callback again', function t () {
@@ -56,11 +51,11 @@ describe('mixinEmitter()', function t () {
 
     describe('and that subcriber unsubscribes', function t () {
       beforeEach(function t () {
-        this.object.off('foobar', this.spy);
+        this.foo.off('bar', this.spy);
       });
       describe('and when emit() is invoked again', function t () {
         beforeEach(function t () {
-          this.emitter.emit('foobar', 'baz');
+          this.foo.bar('baz');
         });
 
         it('should not invoke the callback', function t () {
@@ -73,13 +68,13 @@ describe('mixinEmitter()', function t () {
   describe('given a "once" subscriber', function t () {
     beforeEach(function t () {
       this.spy = sinon.spy();
-      this.object.once('foobar', this.spy);
+      this.foo.once('bar', this.spy);
     });
 
     describe('when emit() is invoked', function t () {
       beforeEach(function t () {
         this.args = [1, 0, -1];
-        this.emitter.emit('foobar', ...this.args);
+        this.foo.bar(...this.args);
       });
 
       it('should invoke the callback', function t () {
@@ -88,7 +83,7 @@ describe('mixinEmitter()', function t () {
 
       describe('and when emit() is invoked again', function t () {
         beforeEach(function t () {
-          this.emitter.emit('foobar', 'baz');
+          this.foo.bar('baz');
         });
 
         it('should not invoke the callback again', function t () {

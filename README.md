@@ -6,40 +6,41 @@
 ## Getting Started
 
 ```shell
-npm install --save @cork-labs/mixin-emitter
+npm install --save @cork-labs/interface-emitter
 ```
 
 ```typescript
-import { mixinEmitter } from '@cork-labs/mixin-emitter';
+import { EventEmitter, EventName, IEmitter, ListenerCallback } from '@cork-labs/interface-emitter';
 
-class Foobar implements IEmitter {
+export class Foo implements IEmitter {
   private emitter: EventEmitter;
 
   constructor () {
-    this.emitter = mixinEmitter(this);
+    this.emitter = new EventEmitter();
   }
 
-  bar () {
-    this.emitter.emit('baz', 101, 102);
+  public bar (...args: number[]) {
+    this.emitter.emit('bar', 33, 42);
+  }
+
+  public on (event: EventName, listener: ListenerCallback): void {
+    this.emitter.on(event, listener);
+  }
+
+  public off (event: EventName, listener: ListenerCallback): void {
+    this.emitter.off(event, listener);
+  }
+
+  public once (event: EventName, listener: ListenerCallback): void {
+    this.emitter.once(event, listener);
   }
 }
 
-const foobar = new Foobar(this);
-foobar.on('baz', (arg1, arg2) => {
-  console.log(arg1, arg2); // 101, 102
+const foo = new Foo();
+foo.on('bar', () => {
+  console.log(arg1, arg2); // 33, 42
 });
 ```
-
-
-## API
-
-### `mixinEmitter`
-
-#### `mixinEmitter(object): EventEmitter`
-
-Exposes `on()`, `once()`, `off()` in the object and returns the underlying `EventEmitter`.
-
-- `object: any`
 
 
 ## Development
